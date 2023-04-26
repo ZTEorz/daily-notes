@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原生 AJAX 的 GET 请求</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .sentence{
+      position: relative;
+      height: 60px;
+      padding-left: 110px;
+      background: lightblue;
+    }
+    .sentence .btn{
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      width: 100px;
+      height: 50px;
+      background: lightcyan;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .sentence .text{
+      line-height: 60px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sentence">
+    <button class="btn">随机励志语句</button>
+    <span class="text"></span>
+  </div>
+  <script>
+    const btn = document.querySelector('.btn')
+    const sentence = document.querySelector('.sentence .text')
+
+    btn.addEventListener('click',function(){
+      // get 请求用于获取数据
+      // 创建 XMLHttpRequest 对象
+      let xhr = new XMLHttpRequest()
+      // http 请求准备，设置请求方式和请求 url
+      xhr.open('GET','https://api.vvhan.com/api/en?type=sj')
+      // 发送请求
+      xhr.send()
+      // 监听 xhr 的状态改变
+      xhr.addEventListener('readystatechange',function(){
+        // readyState 为 4 时表示请求完成响应就绪，status 为 200 表示请求成功
+        if (this.readyState == 4 && this.status == 200) {
+          // 解析为对象并取出需要的数据
+          sentence.innerHTML = JSON.parse(this.responseText).data.zh
+        }
+      })
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>axios 第三方 HTTP 库</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .clearfix::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    .clearfix>.left {
+      float: left;
+    }
+
+    .clearfix>.right {
+      float: right;
+    }
+
+    .add-text {
+      resize: none;
+      width: 48vw;
+      height: 80vh;
+      font-size: 2em;
+    }
+
+    button {
+      width: 200px;
+      height: 50px;
+    }
+
+    .show-area {
+      width: 48vw;
+      height: 80vh;
+      padding: 0 20px;
+      border: 1px solid black;
+    }
+
+    .show-area ul{
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="clearfix">
+    <div class="left">
+      <textarea class="add-text" cols="30" rows="10" placeholder="输入区域"></textarea>
+      <br>
+      <button>点击提交</button>
+      <button>点击显示</button>
+    </div>
+    <div class="right show-area">
+      <h1>显示区域</h1>
+      <hr>
+      <ul></ul>
+    </div>
+  </div>
+  <!-- 引入 axios -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    const addBtn = document.querySelectorAll('button')[0]
+    const showBtn = document.querySelectorAll('button')[1]
+    const ul = document.querySelector('.show-area ul')
+    // 设置 axios 默认 baseURL 和 timeout
+    axios.defaults.baseURL = 'http://localhost:3000'
+    axios.defaults.timeout = 3000
+    // 响应拦截，让响应直接返回响应内容
+    axios.interceptors.response.use(function (response) {
+      return response.data
+    },function(error){
+      return Promise.reject(error)
+    })
+
+    addBtn.addEventListener('click',function(){
+      let newContent = document.querySelector('.add-text').value
+      if (newContent != '') {
+        // axios post 请求
+        axios.post('/contents', {
+          content: newContent
+        })
+      }
+    })
+
+    showBtn.addEventListener('click', function () {
+      // axios get 请求
+      axios.get('/contents').then(response=>{
+        response.forEach(function(item){
+          ul.innerHTML += `<li>${item.content}</li>`
+        })
+      })
+    })
+  </script>
+</body>
+
+</html>

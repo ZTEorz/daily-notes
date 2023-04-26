@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise 优化 HTTP 请求</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .sentence {
+      position: relative;
+      height: 60px;
+      padding-left: 110px;
+      background: lightblue;
+    }
+
+    .sentence .btn {
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      width: 100px;
+      height: 50px;
+      background: lightcyan;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .sentence .text {
+      line-height: 60px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sentence">
+    <button class="btn">随机励志语句</button>
+    <span class="text"></span>
+  </div>
+  <script>
+    const btn = document.querySelector('.btn')
+    const sentence = document.querySelector('.sentence .text')
+
+    btn.addEventListener('click', function () {
+      getData('https://api.vvhan.com/api/en?type=sj').then(data=>{
+        sentence.innerHTML = data.data.zh
+      })
+    })
+    // 定义函数使用 Promise 让 DOM 操作和 HTTP 请求之间的耦合性降低
+    function getData(url) {
+      let p = new Promise(function (resolve, reject) {
+        let xhr = new XMLHttpRequest()
+        xhr.open('GET', url)
+        xhr.send()
+        xhr.addEventListener('readystatechange', function () {
+          if (this.readyState == 4 && this.status == 200) {
+            resolve(JSON.parse(this.responseText))
+          }
+        })
+      })
+      return p
+    }
+  </script>
+</body>
+
+</html>

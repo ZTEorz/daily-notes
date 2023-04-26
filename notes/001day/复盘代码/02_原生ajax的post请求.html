@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原生 AJAX 的 POST 请求</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .clearfix::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    .clearfix>.left {
+      float: left;
+    }
+
+    .clearfix>.right {
+      float: right;
+    }
+
+    .add-text {
+      resize: none;
+      width: 48vw;
+      height: 80vh;
+      font-size: 2em;
+    }
+
+    button {
+      width: 200px;
+      height: 50px;
+    }
+
+    .show-area {
+      width: 48vw;
+      height: 80vh;
+      padding: 0 20px;
+      border: 1px solid black;
+    }
+
+    .show-area ul{
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="clearfix">
+    <div class="left">
+      <textarea class="add-text" cols="30" rows="10" placeholder="输入区域"></textarea>
+      <br>
+      <button>点击提交</button>
+      <button>点击显示</button>
+    </div>
+    <div class="right show-area">
+      <h1>显示区域</h1>
+      <hr>
+      <ul></ul>
+    </div>
+  </div>
+  <script>
+    const addBtn = document.querySelectorAll('button')[0]
+    const showBtn = document.querySelectorAll('button')[1]
+    const ul = document.querySelector('.show-area ul')
+
+    addBtn.addEventListener('click',function(){
+      // post 请求用于新增数据
+      // 创建 XMLHttpRequest 对象
+      let xhr = new XMLHttpRequest()
+      // post 请求准备
+      xhr.open('POST', 'http://localhost:3000/contents')
+      // post 请求需要设置请求头
+      xhr.setRequestHeader('Content-Type','application/json')
+      let newContent = document.querySelector('.add-text').value
+      if (newContent != '') {
+        // post 请求发送的数据需要使用 send() 方法发送，且需要转为 JSON 字符串
+        xhr.send(JSON.stringify({
+          content: newContent
+        }))
+      }
+    })
+    showBtn.addEventListener('click', function () {
+      let xhr = new XMLHttpRequest()
+      xhr.open('GET', 'http://localhost:3000/contents')
+      xhr.send()
+      xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          let datalist = JSON.parse(this.responseText)
+          datalist.forEach(item => {
+            ul.innerHTML += `<li>${item.content}</li>`
+          });
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

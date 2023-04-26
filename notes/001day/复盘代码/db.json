@@ -1,0 +1,49 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "contents": [
+    {
+      "content": "阿斯蒂芬",
+      "id": 4
+    },
+    {
+      "content": "撒旦",
+      "id": 5
+    },
+    {
+      "content": "ZXCV",
+      "id": 6
+    },
+    {
+      "content": "QEWR",
+      "id": 7
+    },
+    {
+      "content": "手动阀",
+      "id": 8
+    },
+    {
+      "content": "现在v",
+      "id": 9
+    },
+    {
+      "content": "去发射点发",
+      "id": 10
+    }
+  ]
+}
