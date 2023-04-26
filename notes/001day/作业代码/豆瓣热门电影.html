@@ -56,87 +56,11 @@
     .movie .info .score {
       color: #e09077;
     }
-
-    .movie .detail {
-      /* display: none; */
-      position: absolute;
-      z-index: 2;
-      top: 0;
-      left: 140px;
-      width: 340px;
-      height: 340px;
-      background-color: #fff;
-      /* background-color: #f00; */
-      border: 1px solid grey;
-    }
-
-    .movie .detail .infomation,
-    .movie .detail .intro {
-      padding: 20px;
-    }
-
-    .movie .detail .title {
-      color: #347bb0;
-      font-size: 1.2em;
-    }
-
-    .movie .detail .tags {
-      display: flex;
-      flex-wrap: wrap;
-      flex-flow: row dense;
-    }
-
-    .movie .detail .tag {
-      margin: 0 5px;
-      padding: 0 5px;
-      height: 20px;
-      background-color: #f5f5f5;
-      color: #969696;
-      font-size: 0.8em;
-      line-height: 20px;
-      border-radius: 10px;
-      white-space: nowrap;
-    }
-
-    .movie .detail .intro {
-      background-color: #f5f5f5;
-    }
   </style>
 </head>
 
 <body>
-  <div class="movies">
-
-    <div class="movie">
-      <a href="${url}">
-        <img src="" alt="">
-        <div class="info">
-          <span class="name">神出鬼没</span> <span class="score">5.9</span>
-        </div>
-      </a>
-      <div class="detail">
-        <div class="infomation">
-          <p class="title"><a href="">神出鬼没 Ghosted(2023)</a></p>
-          <div class="stars">⭐⭐⭐<span class="score">5.9</span></div>
-          <div class="tags">
-            <span class="tag">本周新片</span>
-            <span class="tag">本周新片</span>
-            <span class="tag">本周新片</span>
-            <span class="tag">本周新片</span>
-            <span class="tag">本周新片</span>
-            <span class="tag">本周新片</span>
-          </div>
-          <div class="want">
-            <button>想看</button>
-            <button>看过</button>
-          </div>
-        </div>
-        <div class="intro"></div>
-      </div>
-    </div>
-
-
-  </div>
+  <div class="movies"></div>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
     const movies = document.querySelector('.movies')
@@ -151,35 +75,13 @@
         let imgUrl = item.info.imgurl
         let title = item.title
         let score = item.info.pingfen
-        let yanyuans = item.info.yanyuan.split(/\//g).filter(item=>{return !item.includes(/\(|\)/)})
-        console.log(yanyuans)
         movies.innerHTML += `<div class="movie">
                               <a href="${url}">
                                 <img src="${imgUrl}" alt="${title}">
                                 <div class="info">
                                   <span class="name">${title}</span> <span class="score">${score}</span>
                                 </div>
-                              </a>
-                              <div class="detail">
-                                <div class="infomation">
-                                  <p class="title"><a href="">${title}</a></p>
-                                  <div class="stars">⭐⭐⭐<span class="score">${score}</span></div>
-                                  <div class="tags">
-                                    <span class="tag">本周新片</span>
-                                    <span class="tag">本周新片</span>
-                                    <span class="tag">本周新片</span>
-                                    <span class="tag">本周新片</span>
-                                    <span class="tag">本周新片</span>
-                                    <span class="tag">本周新片</span>
-                                  </div>
-                                  <div class="want">
-                                    <button>想看</button>
-                                    <button>看过</button>
-                                  </div>
-                                </div>
-                                <div class="intro"></div>
-                              </div>
-                            </div>`
+                              </a>`
       });
     })
   </script>
