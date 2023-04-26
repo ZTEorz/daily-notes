@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>豆瓣热门电影</title>
+  <meta name="referrer" content="never">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .box {
+      position: relative;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      gap: 20px;
+      width: 60%;
+      margin: 200px auto;
+    }
+
+    .box img {
+      width: 100%;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    p strong {
+      color: orange;
+    }
+
+    .detail {
+      position: absolute;
+      display: none;
+      z-index: 10;
+      width: 400px;
+      background: #fff;
+      border: 1px solid #eee;
+      padding: 20px;
+      text-align: center;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <!-- <div class="item">
+      <a href="">
+        <img src="" alt="">
+        <p>流浪地球<strong>6.6</strong></p>
+      </a>
+    </div> -->
+    <div class="detail">
+      <h2>流浪地球</h2>
+      <p>8.8</p>
+      <div class="actor">
+        2023-04-21(美国网络) / 克里斯·埃文斯 / 安娜·德·阿玛斯 / 艾德里安·布洛迪 / 瑞安·雷诺兹 / 塞巴斯蒂安·斯坦 / 安东尼·麦凯 / 约翰·赵 / 蒂姆·布雷克·尼尔森 / 艾米·塞德丽丝 /
+        泰特·多诺万 / 麦克·莫 / 丽兹·布罗德威 / 穆斯塔法·沙基尔
+      </div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    const box = document.querySelector('.box')
+    axios.get('http://localhost:3000/movies').then(res => {
+      const data = res.data
+      data.forEach(item => {
+        const _item = `<div class="item">
+                        <a href="${item.info.url}">
+                          <img src="${item.info.imgurl}" alt="">
+                          <p>${item.title}<strong>${item.info.pingfen}</strong></p>
+                        </a>
+                      </div>`
+        box.innerHTML += _item
+      })
+      const items = document.querySelectorAll('.item')
+      const itemWidth = items[0].clientWidth
+      const itemHeight = items[0].clientHeight
+      items.forEach((item, index) => {
+        const content = data[index]
+        item.onmouseover = function () {
+          let detail = document.querySelector('.detail')
+          detail.style.display = 'block'
+          detail.innerHTML = `<h2>${content.title}</h2>
+                              <p>${content.info.pingfen}</p>
+                              <div class="actor">
+                                ${content.info.yanyuan}
+                              </div>`
+          if (index < 5) {
+            detail.style.left = (itemWidth + 19) * (index + 1) + 'px'
+            detail.style.top = '0px'
+          }
+          if (index >= 5) {
+            detail.style.left = (itemWidth + 19) * (index - 4) + 'px'
+            detail.style.top = (itemHeight + 19) + 'px'
+          }
+        }
+        item.onmouseout = function () {
+          let detail = document.querySelector('.detail')
+          detail.style.display = 'none'
+        }
+      })
+    })
+  </script>
+</body>
+
+</html>
