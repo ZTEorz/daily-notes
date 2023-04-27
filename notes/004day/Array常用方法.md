@@ -27,7 +27,7 @@ array.every(function(value,index,array),thisValue)
 **语法**
 
 ```
-
+array.fill(value, start, end)
 ```
 
 # filter()
