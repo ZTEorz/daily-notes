@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue 事件绑定</title>
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="add">点我自增</button>
+    <button @click="add">点我自增</button>
+    <button @click="addOne">点我自增</button>
+    <button @click="addTwo">1s 后自增2</button>
+    <button @click="log($event)">点我输出事件对象</button>
+    <p>{{count}}</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        count: 0
+      },
+      methods: {
+        add() {
+          this.count++
+        },
+        addOne: function(){
+          this.count++
+        },
+        addTwo(){
+          setTimeout(() => {
+            this.count += 2
+          }, 2000);
+        },
+        log(e){
+          console.log(e)
+        }
+      }
+    });
+  </script>
+</body>
+</html>
