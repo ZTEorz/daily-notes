@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单选框双向绑定</title>
+</head>
+<body>
+  <div id="app">
+    <input type="radio" name="gender" id="boy" value="男" v-model="check">
+    <label for="boy">男</label>
+    <input type="radio" name="gender" id="girl" value="女" v-model="check">
+    <label for="girl">女</label>
+    <p>单选选择：{{check}}</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el:'#app',
+      data(){
+        return {
+          check:''
+        }
+      }
+    })
+  </script>
+</body>
+</html>

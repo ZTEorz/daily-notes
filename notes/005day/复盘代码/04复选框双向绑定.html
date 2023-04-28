@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>复选框双向绑定</title>
+</head>
+<body>
+  <div id="app">
+    <input type="checkbox" name="is" id="is" v-model="is">
+    <label for="is">{{is}}</label>
+    <br>
+    <input type="checkbox" name="ball" id="football" v-model="ball" value="football">
+    <label for="football">足球</label>
+    <input type="checkbox" name="ball" id="basketball" v-model="ball" value="basketball">
+    <label for="basketball">篮球</label>
+    <input type="checkbox" name="ball" id="pingpang" v-model="ball" value="pingpang">
+    <label for="pingpang">乒乓球</label>
+    <p>多选选择：{{ball}}</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data(){
+        return {
+          is: true,
+          ball: ['basketball']
+        }
+      }
+    })
+  </script>
+</body>
+</html>

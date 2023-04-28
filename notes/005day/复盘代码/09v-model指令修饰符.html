@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>指令修饰符</title>
+<body>
+  <div id="app">
+    <input type="text" v-model.lazy="content">
+    <p>input 内容为：{{content}}</p>
+    <input type="text" v-model.number="num">
+    <p>num + 10 为：{{num+10}}</p>
+    <input type="text" v-model.trim="p">
+    <p>去除两边空格：{{p}}</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el:'#app',
+      data(){
+        return {
+          content:'',
+          num: '',
+          p:''
+        }
+      }
+    })
+  </script>
+</body>
+</html>

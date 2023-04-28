@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文本框和文本域双向绑定</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="inputText">
+    <p>input 输入内容：{{inputText}}</p>
+    <textarea name="" id="" cols="30" rows="10" v-model="textarea"></textarea>
+    <p>textarea 输入内容：{{textarea}}</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data(){
+        return {
+          inputText:'',
+          textarea: ''
+        }
+      }
+    })
+  </script>
+</body>
+</html>

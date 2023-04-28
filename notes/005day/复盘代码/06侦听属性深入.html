@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>侦听属性深入</title>
+</head>
+
+<body>
+  <div id="app">
+    <button @click="num.count++">click</button>
+    <p>{{num.count}} 是 {{num.content}}</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          num: {
+            count: 0,
+            content: '奇数'
+          }
+        }
+      },
+      watch: {
+        num: {
+          handler: function (newValue) {
+            this.num.content = newValue.count % 2 == 0 ? '偶数' : '奇数'
+          },
+          immediate: true,
+          deep: true
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>计算属性深入</title>
+</head>
+<body>
+  <div id="app">
+    姓：<input type="text" v-model="firstName">
+    名：<input type="text" v-model="lastName">
+    姓名：<input type="text" v-model="name">
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data(){
+        return {
+          firstName:'',
+          lastName:'',
+        }
+      },
+      computed: {
+        name: {
+          get: function(){
+            return this.firstName + this.lastName
+          },
+          set: function(value){
+            this.firstName = value.slice(0,1)
+            this.lastName = value.slice(1)
+          }
+        }
+      },
+    })
+  </script>
+</body>
+</html>
