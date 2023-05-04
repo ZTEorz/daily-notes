@@ -1,0 +1,28 @@
+{
+  "product": [
+    {
+      "id": 1,
+      "name": "手机",
+      "price": 1999,
+      "count": 20
+    },
+    {
+      "id": 2,
+      "name": "电脑",
+      "price": 3999,
+      "count": 20
+    },
+    {
+      "id": 3,
+      "name": "冰箱",
+      "price": 888,
+      "count": 80
+    },
+    {
+      "id": 4,
+      "name": "洗衣机",
+      "price": 1333,
+      "count": 40
+    }
+  ]
+}
