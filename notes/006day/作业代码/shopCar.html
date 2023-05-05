@@ -37,7 +37,7 @@
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.price}}</td>
-          <td><button :class="[item.count==0?red:class0]"
+          <td><button :class="{red:item.count === 0}"
               @click="item.count>0?item.count--:item.count=0">-</button>{{item.count|toText}}<button
               @click="item.count++">+</button></td>
           <td><button @click="removeItem(item.id)">删除</button></td>
@@ -70,8 +70,7 @@
         totalPrice: {
           get: function () {
             return this.productList.reduce(function (total, item) {
-              total += item.count * item.price
-              return total
+              return total + item.count * item.price
             }, 0)
           }
         }
